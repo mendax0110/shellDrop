@@ -1,6 +1,8 @@
 import subprocess
 import sys
 
+
+# Check if port is open using nc
 def check_port_with_nc(port):
     try:
         result = subprocess.run(['nc', '-zv', '127.0.0.1', str(port)], capture_output=True, text=True, timeout=10)
@@ -17,6 +19,8 @@ def check_port_with_nc(port):
         print(f"Error while checking port: {e}")
         return False
 
+
+# Run Metasploit handler
 def run_metasploit(ip, port):
     if not check_port_with_nc(port):
         print(f"Port {port} is not open. Metasploit handler setup aborted.")
@@ -37,6 +41,7 @@ def run_metasploit(ip, port):
     if stderr:
         print(f"Errors:\n{stderr}", file=sys.stderr)
 
+# Main
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Usage: python script.py <Local IP> <Local Port>")
